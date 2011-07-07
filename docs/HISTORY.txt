@@ -4,7 +4,7 @@ Changelog
 0.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+* Leaving AnnotationStorage behind, let's use AttributeStorage [erico_andrei]
 
 
 0.5 (2011-07-07)
