@@ -1,7 +1,7 @@
-Internet contact info
+Phone contact info
 ========================
 
-Implementation of a behavior providing common used contact info
+Implementation of a behavior providing phone and mobile fields
 
 Test Internet Contact Info
 ---------------------------
@@ -9,9 +9,9 @@ Test Internet Contact Info
 When we create a dexterity content type::
 
     >>> from plone.dexterity.fti import DexterityFTI
-    >>> from collective.behavior.contactinfo.behavior.contactinfo import INetContactInfo
+    >>> from collective.behavior.contactinfo.behavior.contactinfo import IPhoneContactInfo
     >>> fti = DexterityFTI('simple_type')
-    >>> fti.behaviors = ('collective.behavior.contactinfo.behavior.contactinfo.INetContactInfo',)
+    >>> fti.behaviors = ('collective.behavior.contactinfo.behavior.contactinfo.IPhoneContactInfo',)
     >>> self.portal.portal_types._setObject('simple_type', fti)
     'simple_type'
     >>> schema = fti.lookupSchema()
@@ -32,10 +32,8 @@ We can see this type in the addable types at the root of the site::
     >>> browser.getControl("simple_type").click()
     >>> browser.getControl("Add").click()
     >>> browser.getControl(name="form.widgets.title").value = "Foo"
-    >>> browser.getControl(name="form.widgets.INetContactInfo.email").value = "email@domain.com"
-    >>> browser.getControl(name="form.widgets.INetContactInfo.twitter").value = "@bomdiaporque"
-    >>> browser.getControl(name="form.widgets.INetContactInfo.irc_nickname").value = "bomdiaporque"
-    >>> browser.getControl(name="form.widgets.INetContactInfo.site").value = "http://domain.com"
+    >>> browser.getControl(name="form.widgets.IPhoneContactInfo.phone").value = "551138982121"
+    >>> browser.getControl(name="form.widgets.IPhoneContactInfo.mobile").value = "551138982121"
     >>> browser.getControl(name="form.buttons.save").click()
     >>> browser.url
     'http://nohost/plone/simple_type/view'
@@ -45,14 +43,10 @@ We can now access our type and its values::
     >>> "http://nohost/plone/author/root" in browser.contents
     True
     >>> md = self.portal.simple_type
-    >>> info_adapter = INetContactInfo(md, None)
+    >>> info_adapter = IPhoneContactInfo(md, None)
     >>> info_adapter is not None
     True
-    >>> info_adapter.email
-    u'email@domain.com'
-    >>> info_adapter.twitter
-    u'@bomdiaporque'
-    >>> info_adapter.irc_nickname
-    u'bomdiaporque'
-    >>> info_adapter.site
-    'http://domain.com'
+    >>> info_adapter.phone
+    u'551138982121'
+    >>> info_adapter.mobile
+    u'551138982121'
