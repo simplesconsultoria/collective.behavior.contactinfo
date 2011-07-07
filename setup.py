@@ -6,7 +6,7 @@ version = open(os.path.join("collective", "behavior", "contactinfo", "version.tx
 
 setup(name='collective.behavior.contactinfo',
       version=version,
-      description="Dexterity behavior",
+      description="A set of dexterity behaviors providing common contact info fields",
       long_description=open(os.path.join("collective", "behavior", "contactinfo", "README.txt")).read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
