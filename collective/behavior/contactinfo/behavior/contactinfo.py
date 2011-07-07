@@ -42,16 +42,16 @@ class IPhoneContactInfo(form.Schema):
    """
       Marker/Form interface for a set of telephone contact information
    """
-    phone = schema.TextLine(
-        title=_(u'Phone'),
-        description=_(u'Please provide a telephone number where you can be reached.'),
-        required=False,
-        )
-
-    mobile = schema.TextLine(
-        title=_(u'Mobile'),
-        description=_(u'Please provide your mobile phone number.'),
-        required=False,
-        )
+   phone = schema.TextLine(
+       title=_(u'Phone'),
+       description=_(u'Please provide a telephone number where you can be reached.'),
+       required=False,
+       )
+   
+   mobile = schema.TextLine(
+       title=_(u'Mobile'),
+       description=_(u'Please provide your mobile phone number.'),
+       required=False,
+       )
 
 alsoProvides(IPhoneContactInfo,IFormFieldProvider)
