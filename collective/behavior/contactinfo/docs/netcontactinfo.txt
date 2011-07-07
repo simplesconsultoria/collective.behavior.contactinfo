@@ -42,17 +42,12 @@ We can see this type in the addable types at the root of the site::
 
 We can now access our type and its values::
 
-    >>> "http://nohost/plone/author/root" in browser.contents
-    True
     >>> md = self.portal.simple_type
-    >>> info_adapter = INetContactInfo(md, None)
-    >>> info_adapter is not None
-    True
-    >>> info_adapter.email
+    >>> md.email
     u'email@domain.com'
-    >>> info_adapter.twitter
+    >>> md.twitter
     u'@bomdiaporque'
-    >>> info_adapter.irc_nickname
+    >>> md.irc_nickname
     u'bomdiaporque'
-    >>> info_adapter.site
+    >>> md.site
     'http://domain.com'

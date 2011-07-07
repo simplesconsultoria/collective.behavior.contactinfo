@@ -42,6 +42,7 @@ class IPhoneContactInfo(form.Schema):
    """
       Marker/Form interface for a set of telephone contact information
    """
+   
    phone = schema.TextLine(
        title=_(u'Phone'),
        description=_(u'Please provide a telephone number where you can be reached.'),

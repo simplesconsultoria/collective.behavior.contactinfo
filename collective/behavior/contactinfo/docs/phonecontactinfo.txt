@@ -10,10 +10,10 @@ When we create a dexterity content type::
 
     >>> from plone.dexterity.fti import DexterityFTI
     >>> from collective.behavior.contactinfo.behavior.contactinfo import IPhoneContactInfo
-    >>> fti = DexterityFTI('simple_type')
+    >>> fti = DexterityFTI('phone_type')
     >>> fti.behaviors = ('collective.behavior.contactinfo.behavior.contactinfo.IPhoneContactInfo',)
-    >>> self.portal.portal_types._setObject('simple_type', fti)
-    'simple_type'
+    >>> self.portal.portal_types._setObject('phone_type', fti)
+    'phone_type'
     >>> schema = fti.lookupSchema()
 
 If we access the site as an admin TTW::
@@ -27,26 +27,21 @@ If we access the site as an admin TTW::
 We can see this type in the addable types at the root of the site::
 
     >>> browser.open("http://nohost/plone/folder_factories")
-    >>> "simple_type" in browser.contents
+    >>> "phone_type" in browser.contents
     True
-    >>> browser.getControl("simple_type").click()
+    >>> browser.getControl("phone_type").click()
     >>> browser.getControl("Add").click()
     >>> browser.getControl(name="form.widgets.title").value = "Foo"
     >>> browser.getControl(name="form.widgets.IPhoneContactInfo.phone").value = "551138982121"
     >>> browser.getControl(name="form.widgets.IPhoneContactInfo.mobile").value = "551138982121"
     >>> browser.getControl(name="form.buttons.save").click()
     >>> browser.url
-    'http://nohost/plone/simple_type/view'
+    'http://nohost/plone/phone_type/view'
 
 We can now access our type and its values::
 
-    >>> "http://nohost/plone/author/root" in browser.contents
-    True
-    >>> md = self.portal.simple_type
-    >>> info_adapter = IPhoneContactInfo(md, None)
-    >>> info_adapter is not None
-    True
-    >>> info_adapter.phone
+    >>> md = self.portal.phone_type
+    >>> md.phone
     u'551138982121'
-    >>> info_adapter.mobile
+    >>> md.mobile
     u'551138982121'
