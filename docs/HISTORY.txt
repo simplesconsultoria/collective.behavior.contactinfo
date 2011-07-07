@@ -1,0 +1,11 @@
+Changelog
+=========
+
+0.5 - Unreleased
+----------------
+
+* Phone contact info behavior [erico_andrei]
+
+* Net contact info behavior [erico_andrei]
+
+* Initial release [erico_andrei]
