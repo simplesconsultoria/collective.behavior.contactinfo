@@ -1,0 +1,76 @@
+Metadata on objects
+===================
+
+The default dublin core implementation from CMF is used by dexterity in the
+Dublin Core behaviour, a subset of which is available in the Ownership, Basic
+Metadata, etc behaviours.
+
+Test setup
+----------
+
+Before we can run these tests, we need to load the collective.behavior.contactinfo
+configuration. This will configure the behavior.
+
+    >>> configuration = """\
+    ... <configure
+    ...      xmlns="http://namespaces.zope.org/zope"
+    ...      i18n_domain="collective.behavior.contactinfo">
+    ...      
+    ...     <include package="Products.Five" file="meta.zcml" />
+    ...     <include package="collective.behavior.contactinfo" file="configure.zcml" />
+    ...     
+    ... </configure>
+    ... """
+
+    >>> from StringIO import StringIO
+    >>> from zope.configuration import xmlconfig
+    >>> xmlconfig.xmlconfig(StringIO(configuration))
+
+Test Internet Contact Info
+---------------------------
+
+When we create a dexterity content type::
+
+    >>> from plone.dexterity.fti import DexterityFTI
+    >>> fti = DexterityFTI('simple_type')
+    >>> fti.behaviors = ('collective.behavior.contactinfo.behavior.contactinfo.INetContactInfo',)
+    >>> self.portal.portal_types._setObject('simple_type', fti)
+    'simple_type'
+    >>> schema = fti.lookupSchema()
+
+If we access the site as an admin TTW::
+
+    >>> from Products.Five.testbrowser import Browser
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+    >>> self.app.acl_users.userFolderAddUser('root', 'secret', ['Manager'], [])
+    >>> browser.addHeader('Authorization', 'Basic root:secret')
+
+We can see this type in the addable types at the root of the site::
+
+    >>> browser.open("http://nohost/plone/folder_factories")
+    >>> "simple_type" in browser.contents
+    True
+    >>> browser.getControl("simple_type").click()
+    >>> browser.getControl("Add").click()
+    >>> browser.getControl(name="form.widgets.INetContactInfo.email").value = "email@domain.com"
+    >>> browser.getControl(name="form.widgets.INetContactInfo.twitter").value = "@bomdiaporque"
+    >>> browser.getControl(name="form.widgets.INetContactInfo.irc_nickname").value = "bomdiaporque"
+    >>> browser.getControl(name="form.widgets.INetContactInfo.site").value = "http://domain.com"
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url
+    'http://nohost/plone/simple_type/view'
+    
+We can now access our type and its values::
+
+    >>> "http://nohost/plone/author/root" in browser.contents
+    True
+    >>> md = self.portal.simple_type
+    >>> md.email
+    'email@domain.com'
+    >>> md.twitter
+    '@bomdiaporque'
+    >>> md.irc_nickname
+    'bomdiaporque'
+    >>> md.site
+    'http://domain.com'

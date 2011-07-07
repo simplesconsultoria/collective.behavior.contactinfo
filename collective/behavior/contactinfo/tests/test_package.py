@@ -27,6 +27,9 @@ class TestPackage(TestCase):
 
 def test_suite():
     from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-    suite.addTest(makeSuite(TestPackage))
+    from Testing import ZopeTestCase as ztc
+    suite = ztc.FunctionalDocFileSuite(
+                'netcontactinfo.txt', package='collective.behavior.contactinfo',
+                test_class=TestCase)
+
     return suite
