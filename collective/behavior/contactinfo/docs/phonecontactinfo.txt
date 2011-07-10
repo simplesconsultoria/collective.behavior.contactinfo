@@ -3,7 +3,7 @@ Phone contact info
 
 Implementation of a behavior providing phone and mobile fields
 
-Test Internet Contact Info
+Test Phone Contact Info
 ---------------------------
 
 When we create a dexterity content type::
