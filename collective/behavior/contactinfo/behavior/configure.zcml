@@ -21,5 +21,12 @@
         for="plone.dexterity.interfaces.IDexterityContent"
         />
 
+    <plone:behavior
+        title="Address contact Info"
+        description="Contact information behavior providing address fields"
+        provides=".address.IAddress"
+        for="plone.dexterity.interfaces.IDexterityContent"
+        />
+
 </configure>
 
