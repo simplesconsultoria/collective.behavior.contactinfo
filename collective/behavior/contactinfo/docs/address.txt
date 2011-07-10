@@ -1,0 +1,56 @@
+Address contact info
+========================
+
+Implementation of a behavior providing an address set of fields
+
+Test Address Contact Info
+---------------------------
+
+When we create a dexterity content type::
+
+    >>> from plone.dexterity.fti import DexterityFTI
+    >>> from collective.behavior.contactinfo.behavior.address import IAddress
+    >>> fti = DexterityFTI('address_type')
+    >>> fti.behaviors = ('collective.behavior.contactinfo.behavior.address.IAddress',)
+    >>> self.portal.portal_types._setObject('address_type', fti)
+    'address_type'
+    >>> schema = fti.lookupSchema()
+
+If we access the site as an admin TTW::
+
+    >>> from Products.Five.testbrowser import Browser
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+    >>> self.app.acl_users.userFolderAddUser('root', 'secret', ['Manager'], [])
+    >>> browser.addHeader('Authorization', 'Basic root:secret')
+
+We can see this type in the addable types at the root of the site::
+
+    >>> browser.open("http://nohost/plone/folder_factories")
+    >>> "address_type" in browser.contents
+    True
+    >>> browser.getControl("address_type").click()
+    >>> browser.getControl("Add").click()
+    >>> browser.getControl(name="form.widgets.title").value = "Foo"
+    >>> browser.getControl(name="form.widgets.IAddress.address").value = "R. dos Pinheiros 836"
+    >>> browser.getControl(name="form.widgets.IAddress.city").value = "Sao Paulo"
+    >>> browser.getControl(name="form.widgets.IAddress.state").value = "SP"
+    >>> browser.getControl(name="form.widgets.IAddress.postcode").value = "05422-001"
+    >>> browser.getControl('Country').value = ["br",]
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url
+    'http://nohost/plone/address_type/view'
+
+We can now access our type and its values::
+
+    >>> md = self.portal.address_type
+    >>> md.address
+    u'R. dos Pinheiros 836'
+    >>> md.city
+    u'Sao Paulo'
+    >>> md.state
+    u'SP'
+    >>> md.postcode
+    u'05422-001'
+    >>> md.country
+    u'br'

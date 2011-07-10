@@ -62,6 +62,9 @@ def test_suite():
                 test_class=TestCase),
             ztc.FunctionalDocFileSuite(
                 'phonecontactinfo.txt', package='collective.behavior.contactinfo.docs',
+                test_class=TestCase),
+            ztc.FunctionalDocFileSuite(
+                'address.txt', package='collective.behavior.contactinfo.docs',
                 test_class=TestCase),])
 
     return suite
