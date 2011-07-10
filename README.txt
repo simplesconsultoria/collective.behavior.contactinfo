@@ -18,6 +18,9 @@ Internet contact info
 Phone contact Info 
     Providing phone and mobile fields
 
+Address contact Info 
+    Providing address set of fields
+
 Requirements
 ------------
 

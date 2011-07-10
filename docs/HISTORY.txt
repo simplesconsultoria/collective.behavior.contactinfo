@@ -4,7 +4,7 @@ Changelog
 0.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+* Added a behavior for Address [erico_andrei]
 
 
 0.6 (2011-07-07)

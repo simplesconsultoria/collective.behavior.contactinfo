@@ -22,7 +22,7 @@
         />
 
     <plone:behavior
-        title="Address contact Info"
+        title="Address contact info"
         description="Contact information behavior providing address fields"
         provides=".address.IAddress"
         for="plone.dexterity.interfaces.IDexterityContent"
