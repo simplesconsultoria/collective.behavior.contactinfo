@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-02-27 17:49+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"POT-Creation-Date: 2011-07-13 23:26+0000\n"
+"PO-Revision-Date: 2011-07-13 20:31-0300\n"
 "Last-Translator: Simples Consultoria <products@simplesconsultoria.com.br>\n"
 "Language-Team: Simples Consultoria <products@simplesconsultoria.com.br>\n"
 "MIME-Version: 1.0\n"
@@ -13,4 +13,72 @@ msgstr ""
 "Language-Name: Brazilian Portuguese\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.behavior.contactinfo\n"
+
+#: ../behavior/address.py:14
+msgid "Address"
+msgstr "Endereço"
+
+#: ../behavior/address.py:19
+msgid "City"
+msgstr "Cidade"
+
+#: ../behavior/address.py:34
+msgid "Country"
+msgstr "País"
+
+#: ../behavior/contactinfo.py:16
+msgid "E-mail"
+msgstr "E-mail"
+
+#: ../behavior/contactinfo.py:28
+msgid "IRC Nickname"
+msgstr "IRC"
+
+#: ../behavior/contactinfo.py:53
+msgid "Mobile"
+msgstr "Celular"
+
+#: ../behavior/contactinfo.py:47
+msgid "Phone"
+msgstr "Telefone"
+
+#: ../behavior/contactinfo.py:48
+msgid "Please provide a telephone number where you can be reached."
+msgstr "Por favor, informe um número de telefone."
+
+#: ../behavior/contactinfo.py:17
+msgid "Please provide an email address"
+msgstr "Por favor, informe um endereço de e-mail."
+
+#: ../behavior/contactinfo.py:35
+msgid "Please provide the address of your site, blog or profile"
+msgstr "Por favor, informe o endereço (com http://) de seu site, blog ou perfil na web."
+
+#: ../behavior/contactinfo.py:29
+msgid "Please provide your IRC nickname, if you have one."
+msgstr "Caso utilize IRC, por favor nos diga seu apelido (nickname)."
+
+#: ../behavior/contactinfo.py:23
+msgid "Please provide your Twitter name, if you have one."
+msgstr "Por favor nos diga qual seu usuário no Twitter, caso tenha um."
+
+#: ../behavior/contactinfo.py:54
+msgid "Please provide your mobile phone number."
+msgstr "Por favor, informe o número de seu telefone celular."
+
+#: ../behavior/address.py:29
+msgid "Post Code / Zip Code"
+msgstr "CEP / Código postal"
+
+#: ../behavior/contactinfo.py:34
+msgid "Site"
+msgstr "Site"
+
+#: ../behavior/address.py:24
+msgid "State"
+msgstr "Estado / Província"
+
+#: ../behavior/contactinfo.py:22
+msgid "Twitter"
+msgstr "Twitter"
 
