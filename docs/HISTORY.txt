@@ -4,7 +4,7 @@ Changelog
 0.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+* Updated Brazilian Portuguese translation [erico_andrei]
 
 
 0.7 (2011-07-09)
