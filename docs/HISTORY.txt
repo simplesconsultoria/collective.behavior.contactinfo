@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.8 (unreleased)
+0.8 (2011-07-13)
 ----------------
 
 * Updated Brazilian Portuguese translation [erico_andrei]
