@@ -54,3 +54,48 @@ We can now access our type and its values::
     u'05422-001'
     >>> md.country
     u'br'
+
+Test Behavior selection
+----------------------------
+
+This will test adding a behavior to an existing content type.
+
+When we create a dexterity content type::
+
+    >>> from plone.dexterity.fti import DexterityFTI
+    >>> from collective.behavior.contactinfo.behavior.address import IAddress
+    >>> fti = DexterityFTI('new_address_type')
+    >>> self.portal.portal_types._setObject('new_address_type', fti)
+    'new_address_type'
+    >>> schema = fti.lookupSchema()
+
+If we access the site as an admin TTW::
+
+    >>> from Products.Five.testbrowser import Browser
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+    >>> browser.addHeader('Authorization', 'Basic root:secret')
+
+We can see this type in the addable types at the root of the site::
+
+    >>> browser.open("http://nohost/plone/folder_factories")
+    >>> "new_address_type" in browser.contents
+    True
+    >>> browser.getControl("new_address_type").click()
+    >>> browser.getControl("Add").click()
+    >>> browser.getControl(name="form.widgets.title").value = "Foo"
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url
+    'http://nohost/plone/new_address_type/view'
+
+Now we add the behavior to this new content type::
+
+    >>> self.portal.portal_types['new_address_type'].behaviors = ('collective.behavior.contactinfo.behavior.address.IAddress',)
+
+And visit an existing content::
+
+    >>> browser.open("http://nohost/plone/new_address_type/view")
+    >>> "city" in browser.contents
+    True
+    
+    

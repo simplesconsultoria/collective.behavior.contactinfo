@@ -45,3 +45,57 @@ We can now access our type and its values::
     u'551138982121'
     >>> md.mobile
     u'551138982121'
+
+Test Behavior selection
+----------------------------
+
+This will test adding a behavior to an existing content type.
+
+When we create a dexterity content type::
+
+    >>> from plone.dexterity.fti import DexterityFTI
+    >>> from collective.behavior.contactinfo.behavior.contactinfo import IPhoneContactInfo
+    >>> fti = DexterityFTI('new_simple_type')
+    >>> self.portal.portal_types._setObject('new_simple_type', fti)
+    'new_simple_type'
+    >>> schema = fti.lookupSchema()
+
+If we access the site as an admin TTW::
+
+    >>> from Products.Five.testbrowser import Browser
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+    >>> browser.addHeader('Authorization', 'Basic root:secret')
+
+We can see this type in the addable types at the root of the site::
+
+    >>> browser.open("http://nohost/plone/folder_factories")
+    >>> "new_simple_type" in browser.contents
+    True
+    >>> browser.getControl("new_simple_type").click()
+    >>> browser.getControl("Add").click()
+    >>> browser.getControl(name="form.widgets.title").value = "Foo"
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url
+    'http://nohost/plone/new_simple_type/view'
+
+We will add a value to a non-existing field::
+    
+    >>> self.portal.new_simple_type.mobile = u'551138982121'
+
+Now we add the behavior to this new content type::
+
+    >>> self.portal.portal_types['new_simple_type'].behaviors = ('collective.behavior.contactinfo.behavior.contactinfo.IPhoneContactInfo',)
+
+And visit an existing content::
+
+    >>> browser.open("http://nohost/plone/new_simple_type/view")
+    >>> "mobile" in browser.contents
+    True
+    >>> "551138982121" in browser.contents
+    True
+    >>> md = self.portal.new_simple_type
+    >>> md.mobile
+    u'551138982121'
+
+    
