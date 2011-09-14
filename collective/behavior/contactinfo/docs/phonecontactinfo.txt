@@ -98,4 +98,14 @@ And visit an existing content::
     >>> md.mobile
     u'551138982121'
 
+
+Edit an existing content::
+    
+    >>> browser.open("http://nohost/plone/new_simple_type/edit")
+    >>> browser.getControl(name="form.widgets.title").value = "Foo"
+    >>> browser.getControl(name="form.widgets.IPhoneContactInfo.phone").value = "551138982121"
+    >>> browser.getControl(name="form.widgets.IPhoneContactInfo.mobile").value = "551138982121"
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url    
+    'http://nohost/plone/new_simple_type'
     
