@@ -8,21 +8,25 @@ Test Address Contact Info
 
 When we create a dexterity content type::
 
+    >>> app = layer['app']
+    >>> portal = layer['portal']
+    >>> portalURL = portal.absolute_url()
     >>> from plone.dexterity.fti import DexterityFTI
     >>> from collective.behavior.contactinfo.behavior.address import IAddress
     >>> fti = DexterityFTI('address_type')
     >>> fti.behaviors = ('collective.behavior.contactinfo.behavior.address.IAddress',)
-    >>> self.portal.portal_types._setObject('address_type', fti)
+    >>> portal.portal_types._setObject('address_type', fti)
     'address_type'
     >>> schema = fti.lookupSchema()
 
 If we access the site as an admin TTW::
-
-    >>> from Products.Five.testbrowser import Browser
-    >>> browser = Browser()
-    >>> browser.handleErrors = False
-    >>> self.app.acl_users.userFolderAddUser('root', 'secret', ['Manager'], [])
-    >>> browser.addHeader('Authorization', 'Basic root:secret')
+    
+    >>> from plone.app.testing import TEST_USER_ID, TEST_USER_PASSWORD, setRoles
+    >>> setRoles(portal, TEST_USER_ID, ['Manager'])
+    >>> import transaction; transaction.commit()
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+    >>> browser.addHeader('Authorization', 'Basic %s:%s' % (TEST_USER_ID, TEST_USER_PASSWORD,))
 
 We can see this type in the addable types at the root of the site::
 
@@ -43,7 +47,7 @@ We can see this type in the addable types at the root of the site::
 
 We can now access our type and its values::
 
-    >>> md = self.portal.address_type
+    >>> md = portal.address_type
     >>> md.address
     u'R. dos Pinheiros 836'
     >>> md.city
@@ -62,19 +66,11 @@ This will test adding a behavior to an existing content type.
 
 When we create a dexterity content type::
 
-    >>> from plone.dexterity.fti import DexterityFTI
-    >>> from collective.behavior.contactinfo.behavior.address import IAddress
     >>> fti = DexterityFTI('new_address_type')
-    >>> self.portal.portal_types._setObject('new_address_type', fti)
+    >>> portal.portal_types._setObject('new_address_type', fti)
     'new_address_type'
     >>> schema = fti.lookupSchema()
-
-If we access the site as an admin TTW::
-
-    >>> from Products.Five.testbrowser import Browser
-    >>> browser = Browser()
-    >>> browser.handleErrors = False
-    >>> browser.addHeader('Authorization', 'Basic root:secret')
+    >>> import transaction; transaction.commit()
 
 We can see this type in the addable types at the root of the site::
 
@@ -90,7 +86,8 @@ We can see this type in the addable types at the root of the site::
 
 Now we add the behavior to this new content type::
 
-    >>> self.portal.portal_types['new_address_type'].behaviors = ('collective.behavior.contactinfo.behavior.address.IAddress',)
+    >>> portal.portal_types['new_address_type'].behaviors = ('collective.behavior.contactinfo.behavior.address.IAddress',)
+    >>> import transaction; transaction.commit()
 
 And visit an existing content::
 
