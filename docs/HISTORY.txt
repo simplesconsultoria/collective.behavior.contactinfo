@@ -4,7 +4,11 @@ Changelog
 0.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+* Add factories to all behaviors [erico_andrei]
+
+* Add latitude and longitude info for IAddress [erico_andrei]
+
+* Tests now use plone.app.testing [erico_andrei]
 
 
 0.8 (2011-07-13)
