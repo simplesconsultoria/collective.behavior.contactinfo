@@ -1,16 +1,12 @@
 # -*- coding:utf-8 -*-
 import unittest
 import transaction
-from Testing.ZopeTestCase import app, close, installProduct, installPackage
-from zope.interface import implements, Interface
-from zope.component import getUtility, getMultiAdapter
+from Testing.ZopeTestCase import app, close
 from Products.CMFCore.utils import getToolByName
 from plone.app.dexterity.tests.base import DexterityFunctionalTestCase
 
-from Products.PloneTestCase.setup import default_user
 from Products.PloneTestCase.layer import PloneSite
 from zope.app.component.hooks import setSite, setHooks
-from DateTime import DateTime
 
 import collective.behavior.contactinfo
 
@@ -54,8 +50,8 @@ class TestCase(DexterityFunctionalTestCase):
         def tearDown(cls):
             pass
 
+
 def test_suite():
-    from unittest import TestSuite, makeSuite
     from Testing import ZopeTestCase as ztc
     suite = unittest.TestSuite([ztc.FunctionalDocFileSuite(
                 'netcontactinfo.txt', package='collective.behavior.contactinfo.docs',
