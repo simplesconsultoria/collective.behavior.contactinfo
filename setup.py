@@ -31,6 +31,9 @@ setup(name='collective.behavior.contactinfo',
           'plone.app.dexterity',
           # -*- Extra requirements: -*-
       ],
+      extras_require={
+              'test': ['plone.app.testing'],
+              },
       entry_points="""
       # -*- Entry points: -*-
 
