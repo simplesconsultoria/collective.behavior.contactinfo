@@ -38,6 +38,18 @@ class IAddress(form.Schema):
         required=True,
         vocabulary='contact.countries',
         )
+    #
+    form.omitted('latitude')
+    latitude = schema.Float(
+        title=_(u'Latitude'),
+        required = False,
+    )
+    #
+    form.omitted('longitude')
+    longitude = schema.Float(
+        title=_(u'Longitude'),
+        required = False,
+    )
 
 
 alsoProvides(IAddress, IFormFieldProvider)
@@ -56,3 +68,12 @@ class Address(object):
     state = context_property('state')
     postcode = context_property('postcode')
     country = context_property('country')
+    latitude = context_property('latitude')
+    longitude = context_property('longitude')
+    #
+    @property
+    def latlong(self):
+        ''' Return a tuple containing latitude and longitude '''
+        latitude = self.latitude or 0.0
+        longitude = self.longitude or 0.0
+        return (latitude, longitude)
