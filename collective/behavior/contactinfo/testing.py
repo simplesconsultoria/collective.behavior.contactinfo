@@ -14,7 +14,10 @@ class Fixture(PloneSandboxLayer):
         # Load ZCML
         import collective.behavior.contactinfo
         self.loadZCML(package=collective.behavior.contactinfo)
-
+    
+    def setUpPloneSite(self, portal):
+        # Setup Plone Site -- install dexterity
+        self.applyProfile(portal, 'plone.app.dexterity:default')
 
 FIXTURE = Fixture()
 INTEGRATION_TESTING = IntegrationTesting(
